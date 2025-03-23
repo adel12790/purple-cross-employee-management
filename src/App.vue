@@ -19,6 +19,20 @@
               </router-link>
             </div>
           </div>
+
+          <!-- User Avatar and Dropdown -->
+          <div class="flex items-center">
+            <div class="relative">
+              <div class="flex items-center space-x-2 focus:outline-none">
+                <img 
+                  src="https://i.pravatar.cc/32?img=3" 
+                  alt="User avatar"
+                  class="h-8 w-8 rounded-full"
+                >
+                <span class="text-sm text-gray-700">John Doe</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </nav>
