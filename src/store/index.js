@@ -12,6 +12,12 @@ export default createStore({
         id: state.employees.length + 1
       });
     },
+    updateEmployee(state, updatedEmployee) {
+      const index = state.employees.findIndex(emp => emp.id === updatedEmployee.id);
+      if (index !== -1) {
+        state.employees.splice(index, 1, updatedEmployee);
+      }
+    },
     deleteEmployee(state, employeeId) {
       state.employees = state.employees.filter(emp => emp.id !== employeeId);
     }
@@ -19,6 +25,9 @@ export default createStore({
   actions: {
     addEmployee({ commit }, employee) {
       commit('addEmployee', employee);
+    },
+    updateEmployee({ commit }, employee) {
+      commit('updateEmployee', employee);
     },
     deleteEmployee({ commit }, employeeId) {
       commit('deleteEmployee', employeeId);

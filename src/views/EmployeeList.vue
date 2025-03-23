@@ -21,6 +21,7 @@
             <div class="p-4">
               <div class="flex justify-between items-start mb-4">
                 <h3 class="text-lg font-semibold text-gray-800">{{ employee.fullName }}</h3>
+                <div class="flex space-x-2">
                   <router-link
                     :to="'/employees/' + employee.id"
                     class="p-1 text-blue-600 hover:text-blue-700"
@@ -28,6 +29,22 @@
                   >
                     <ViewIcon />
                   </router-link>
+                  <router-link
+                    :to="'/employees/' + employee.id + '/edit'"
+                    class="p-1 text-yellow-600 hover:text-yellow-700"
+                    title="Edit"
+                  >
+                    <EditIcon />
+                  </router-link>
+                  <BaseButton
+                    @click="confirmDelete(employee)"
+                    variant="danger"
+                    class="p-1"
+                    title="Delete"
+                  >
+                    <DeleteIcon />
+                  </BaseButton>
+                </div>
               </div>
               
               <div class="space-y-2">
@@ -52,6 +69,14 @@
           </div>
         </div>
 
+        <div class="flex justify-end mt-6">
+          <router-link
+            to="/employees/create"
+            class="px-4 py-2 rounded-md font-medium transition-colors duration-200 bg-blue-500 text-white hover:bg-blue-600 shadow-sm"
+          >
+            Create Employee
+          </router-link>
+        </div>
       </div>
     </div>
   </div>
@@ -110,8 +135,11 @@ export default {
       }
     }
 
-    
-    
+    const confirmDelete = (employee) => {
+      if (confirm(`Are you sure you want to delete ${employee.fullName}?`)) {
+        store.dispatch('deleteEmployee', employee.id)
+      }
+    }
 
     return {
       searchQuery,
@@ -121,6 +149,7 @@ export default {
       sortBy,
       formatEmploymentStatus,
       formatTerminationStatus,
+      confirmDelete
     }
   }
 }
