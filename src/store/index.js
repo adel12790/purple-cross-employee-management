@@ -25,6 +25,9 @@ export default createStore({
     }
   },
   getters: {
+    getEmployeeById: (state) => (id) => {
+      return state.employees.find(emp => emp.id === parseInt(id));
+    },
     getAllEmployees: (state) => {
       return state.employees;
     }

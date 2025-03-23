@@ -21,6 +21,13 @@
             <div class="p-4">
               <div class="flex justify-between items-start mb-4">
                 <h3 class="text-lg font-semibold text-gray-800">{{ employee.fullName }}</h3>
+                  <router-link
+                    :to="'/employees/' + employee.id"
+                    class="p-1 text-blue-600 hover:text-blue-700"
+                    title="View"
+                  >
+                    <ViewIcon />
+                  </router-link>
               </div>
               
               <div class="space-y-2">
@@ -57,6 +64,7 @@ import BaseButton from '@/components/BaseButton.vue'
 import ViewIcon from '@/assets/icons/ViewIcon.vue'
 import EditIcon from '@/assets/icons/EditIcon.vue'
 import DeleteIcon from '@/assets/icons/DeleteIcon.vue'
+import { formatEmploymentStatus, formatTerminationStatus } from '@/utils/format'
 
 export default {
   name: 'EmployeeList',
@@ -102,25 +110,8 @@ export default {
       }
     }
 
-    const formatEmploymentStatus = (date) => {
-      const employmentDate = new Date(date)
-      const today = new Date()
-      if (employmentDate > today) {
-        return 'Employed soon'
-      }
-      return 'Currently employed'
-    }
-
-    const formatTerminationStatus = (date) => {
-      if (!date) return 'N/A'
-      const terminationDate = new Date(date)
-      const today = new Date()
-      if (terminationDate > today) {
-        return 'To be terminated'
-      }
-      return 'Terminated'
-    }
-
+    
+    
 
     return {
       searchQuery,
