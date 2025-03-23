@@ -124,6 +124,7 @@ export default {
     const searchQuery = ref('')
     const sortKey = ref('fullName')
     const sortOrder = ref('asc')
+    const fileInput = ref(null)
 
     const filteredAndSortedEmployees = computed(() => {
       let filtered = store.getters.getAllEmployees.filter(employee => {
@@ -145,6 +146,7 @@ export default {
         }
       })
     })
+
     const exportToCSV = () => {
       const headers = ['Full Name', 'Occupation', 'Department', 'Employment Date', 'Termination Date', 'Email', 'Phone', 'Address']
       const csvContent = [
@@ -169,6 +171,43 @@ export default {
     }
 
     const handleFileUpload = (event) => {
+      const file = event.target.files[0]
+      if (!file) return
+
+      const reader = new FileReader()
+      reader.onload = (e) => {
+        const text = e.target.result
+        const rows = text.split('\n')
+        const headers = rows[0].split(',').map(h => h.replace(/"/g, '').trim())
+        
+        // Get all existing employees and find the highest ID
+        const existingEmployees = store.getters.getAllEmployees
+        const maxId = Math.max(...existingEmployees.map(emp => emp.id), 0)
+        let nextId = maxId + 1
+
+        const employees = rows.slice(1).map(row => {
+          const values = row.split(',').map(v => v.replace(/"/g, '').trim())
+          return {
+            id: nextId++, // Increment ID for each new employee
+            fullName: values[0],
+            occupation: values[1],
+            department: values[2],
+            employmentDate: values[3],
+            terminationDate: values[4] || null,
+            email: values[5] || null,
+            phone: values[6] || null,
+            address: values[7] || null
+          }
+        })
+
+        employees.forEach(employee => {
+          store.dispatch('addEmployee', employee)
+        })
+
+        // Reset file input
+        event.target.value = ''
+      }
+      reader.readAsText(file)
     }
 
     const sortBy = (key) => {
@@ -191,10 +230,13 @@ export default {
       sortKey,
       sortOrder,
       filteredAndSortedEmployees,
+      fileInput,
       sortBy,
       formatEmploymentStatus,
       formatTerminationStatus,
-      confirmDelete
+      confirmDelete,
+      exportToCSV,
+      handleFileUpload
     }
   }
 }
