@@ -6,13 +6,42 @@
 
     <div class="bg-white rounded-lg shadow-sm border border-gray-100">
       <div class="p-6">
-        <div class="mb-6">
-          <input
-            type="text"
-            class="w-full px-3 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-300 bg-white"
-            v-model="searchQuery"
-            placeholder="Search employees..."
-          >
+        <div class="flex justify-between items-center mb-6">
+          <div class="flex-1 max-w-md">
+            <input
+              type="text"
+              class="w-full px-3 py-2 border border-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-300 bg-white"
+              v-model="searchQuery"
+              placeholder="Search employees..."
+            >
+          </div>
+          <div class="flex space-x-3">
+            <input
+              type="file"
+              ref="fileInput"
+              class="hidden"
+              accept=".csv"
+              @change="handleFileUpload"
+            >
+            <BaseButton
+              variant="secondary"
+              @click="$refs.fileInput.click()"
+            >
+              Import CSV
+            </BaseButton>
+            <BaseButton
+              variant="secondary"
+              @click="exportToCSV"
+            >
+              Export CSV
+            </BaseButton>
+            <router-link
+              to="/employees/create"
+              class="px-4 py-2 rounded-md font-medium transition-colors duration-200 bg-blue-500 text-white hover:bg-blue-600 shadow-sm"
+            >
+              Create Employee
+            </router-link>
+          </div>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -68,15 +97,6 @@
             </div>
           </div>
         </div>
-
-        <div class="flex justify-end mt-6">
-          <router-link
-            to="/employees/create"
-            class="px-4 py-2 rounded-md font-medium transition-colors duration-200 bg-blue-500 text-white hover:bg-blue-600 shadow-sm"
-          >
-            Create Employee
-          </router-link>
-        </div>
       </div>
     </div>
   </div>
@@ -125,6 +145,31 @@ export default {
         }
       })
     })
+    const exportToCSV = () => {
+      const headers = ['Full Name', 'Occupation', 'Department', 'Employment Date', 'Termination Date', 'Email', 'Phone', 'Address']
+      const csvContent = [
+        headers.join(','),
+        ...filteredAndSortedEmployees.value.map(employee => [
+          `"${employee.fullName}"`,
+          `"${employee.occupation}"`,
+          `"${employee.department}"`,
+          `"${employee.employmentDate}"`,
+          `"${employee.terminationDate || ''}"`,
+          `"${employee.email || ''}"`,
+          `"${employee.phone || ''}"`,
+          `"${employee.address || ''}"`
+        ].join(','))
+      ].join('\n')
+
+      const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' })
+      const link = document.createElement('a')
+      link.href = URL.createObjectURL(blob)
+      link.download = 'employees.csv'
+      link.click()
+    }
+
+    const handleFileUpload = (event) => {
+    }
 
     const sortBy = (key) => {
       if (sortKey.value === key) {
