@@ -1,0 +1,98 @@
+[
+    {
+      "id": 1,
+      "code": "EMP001",
+      "fullName": "John Smith",
+      "occupation": "Software Developer",
+      "department": "IT",
+      "employmentDate": "2022-03-15",
+      "terminationDate": "2023-12-31",
+      "email": "john.smith@purplecross.com",
+      "phone": "555-123-4567",
+      "address": "123 Main St, New York, NY"
+    },
+    {
+      "id": 2,
+      "code": "EMP002",
+      "fullName": "Sarah Johnson",
+      "occupation": "HR Manager",
+      "department": "Human Resources",
+      "employmentDate": "2020-01-10",
+      "terminationDate": null,
+      "email": "sarah.johnson@purplecross.com",
+      "phone": "555-234-5678",
+      "address": "456 Oak Ave, Chicago, IL"
+    },
+    {
+      "id": 3,
+      "code": "EMP003",
+      "fullName": "Michael Chen",
+      "occupation": "Research Scientist",
+      "department": "R&D",
+      "employmentDate": "2021-06-20",
+      "terminationDate": "2024-06-30",
+      "email": "michael.chen@purplecross.com",
+      "phone": "555-345-6789",
+      "address": "789 Pine St, San Francisco, CA"
+    },
+    {
+      "id": 4,
+      "code": "EMP004",
+      "fullName": "Emma Williams",
+      "occupation": "Marketing Specialist",
+      "department": "Marketing",
+      "employmentDate": "2023-02-05",
+      "terminationDate": "2022-12-31",
+      "email": "emma.williams@purplecross.com",
+      "phone": "555-456-7890",
+      "address": "101 Maple Dr, Boston, MA"
+    },
+    {
+      "id": 5,
+      "code": "EMP005",
+      "fullName": "Robert Taylor",
+      "occupation": "Financial Analyst",
+      "department": "Finance",
+      "employmentDate": "2019-11-12",
+      "terminationDate": "2025-03-15",
+      "email": "robert.taylor@purplecross.com",
+      "phone": "555-567-8901",
+      "address": "202 Elm St, Dallas, TX"
+    },
+    {
+      "id": 6,
+      "code": "EMP006",
+      "fullName": "Lisa Martinez",
+      "occupation": "Clinical Researcher",
+      "department": "R&D",
+      "employmentDate": "2025-04-01",
+      "terminationDate": "2024-12-31",
+      "email": "lisa.martinez@purplecross.com",
+      "phone": "555-678-9012",
+      "address": "303 Cedar Ave, Miami, FL"
+    },
+    {
+      "id": 7,
+      "code": "EMP007",
+      "fullName": "David Wilson",
+      "occupation": "Sales Representative",
+      "department": "Sales",
+      "employmentDate": "2022-08-30",
+      "terminationDate": "2023-06-30",
+      "email": "david.wilson@purplecross.com",
+      "phone": "555-789-0123",
+      "address": "404 Birch Blvd, Seattle, WA"
+    },
+    {
+      "id": 8,
+      "code": "EMP008",
+      "fullName": "Jennifer Lee",
+      "occupation": "Quality Assurance",
+      "department": "Manufacturing",
+      "employmentDate": "2021-03-25",
+      "terminationDate": "2026-12-31",
+      "email": "jennifer.lee@purplecross.com",
+      "phone": "555-890-1234",
+      "address": "505 Walnut St, Denver, CO"
+    }
+  ]
